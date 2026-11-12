@@ -1,0 +1,10 @@
+{{- /* Returns the shell working directory for a page, relative to ~ ("" for home). */ -}}
+{{- $cwd := "" -}}
+{{- if in (slice "section" "taxonomy" "term") .Kind -}}
+  {{- $cwd = strings.TrimPrefix "/" .Path -}}
+{{- else if eq .Kind "page" -}}
+  {{- with .Parent -}}
+    {{- if not .IsHome -}}{{- $cwd = strings.TrimPrefix "/" .Path -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $cwd -}}

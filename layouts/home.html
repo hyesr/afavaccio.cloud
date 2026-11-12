@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{ partial "prompt-line.html" (dict "page" . "cmd" "cat welcome.txt") }}
+<div class="output prose">
+  <p class="banner">Welcome to {{ site.Title }}</p>
+  {{ .Content }}
+</div>
+{{ partial "prompt-line.html" (dict "page" . "cmd" "ls") }}
+<ul class="output ls-short">
+  {{- /* Same order as the top menu; pages that are not in the menu follow. */ -}}
+  {{- $shown := slice }}
+  {{- range site.Menus.main }}
+    {{- with .Page }}
+      {{- if not .IsHome }}
+        {{- $shown = $shown | append .Path }}
+  <li>{{ if .IsSection }}<a class="dir" href="{{ .RelPermalink }}">{{ path.Base .Path }}/</a>{{ else }}<a class="file" href="{{ .RelPermalink }}">{{ path.Base .Path }}.md</a>{{ end }}</li>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  {{- range .Sections }}{{ if not (in $shown .Path) }}
+  <li><a class="dir" href="{{ .RelPermalink }}">{{ path.Base .Path }}/</a></li>
+  {{- end }}{{ end }}
+  {{- range $name, $tax := site.Taxonomies }}{{ with site.GetPage (printf "/%s" $name) }}
+  <li><a class="dir" href="{{ .RelPermalink }}">{{ path.Base .Path }}/</a></li>
+  {{- end }}{{ end }}
+  {{- range .RegularPages }}{{ if not (in $shown .Path) }}
+  <li><a class="file" href="{{ .RelPermalink }}">{{ path.Base .Path }}.md</a></li>
+  {{- end }}{{ end }}
+</ul>
+{{- /* Newest blog post: changes by itself every time a post is published. */ -}}
+{{- with site.GetPage "/blog" }}
+  {{- range first 1 .RegularPages.ByDate.Reverse }}
+{{ partial "prompt-line.html" (dict "page" $ "cmd" "ls -t blog | head -1") }}
+<ul class="output ls-long">
+  <li>
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+    <a class="file" href="{{ .RelPermalink }}">{{ path.Base .Path }}.md</a>
+    <span class="desc"># {{ .Title }}</span>
+  </li>
+</ul>
+  {{- end }}
+{{- end }}
+<p class="hint js-only"># Type <kbd>help</kbd> at the prompt below, or just use the links.</p>
+{{ end }}

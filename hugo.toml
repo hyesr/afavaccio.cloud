@@ -1,0 +1,51 @@
+baseURL = "https://afavaccio.cloud/"
+locale = "en"
+title = "afavaccio.cloud"
+enableRobotsTXT = true
+
+[params]
+  description = "Personal site of Andrea: about, projects and notes, served from a terminal."
+  # Printed by the `whoami` command, after the visitor's user name.
+  bio = "Andrea, DevOps engineer. Believes it was DNS until proven otherwise."
+  # Day the site went online: `uptime` and `neofetch` count from it.
+  launched = "2026-11-14"
+  # Shown in the shell prompt: user@host:~$
+  user = "guest"
+  host = "afavaccio"
+
+[taxonomies]
+  tag = "tags"
+
+[outputs]
+  # The home JSON output is the virtual filesystem used by the interactive prompt.
+  home = ["html", "rss", "json"]
+  section = ["html", "rss"]
+
+[markup.highlight]
+  # Colours come from assets/css/syntax.css instead of inline styles.
+  noClasses = false
+
+[[menus.main]]
+  name = "~"
+  pageRef = "/"
+  weight = 10
+
+[[menus.main]]
+  name = "about"
+  pageRef = "/about"
+  weight = 20
+
+[[menus.main]]
+  name = "projects"
+  pageRef = "/projects"
+  weight = 30
+
+[[menus.main]]
+  name = "blog"
+  pageRef = "/blog"
+  weight = 40
+
+[[menus.main]]
+  name = "contact"
+  pageRef = "/contact"
+  weight = 50

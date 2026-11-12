@@ -1,0 +1,3 @@
+{{- /* A command the visitor can click to run in the prompt. Usage: {{< cmd "kubectl get nodes" >}} */ -}}
+{{- $cmd := .Get 0 -}}
+<button type="button" class="run" data-cmd="{{ $cmd }}" title="Run this command">{{ $cmd }}</button>

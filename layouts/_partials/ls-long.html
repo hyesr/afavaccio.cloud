@@ -1,0 +1,16 @@
+{{- /* Renders a list of pages as `ls -l` output. Context: a page collection. */ -}}
+<p class="total">total {{ len . }}</p>
+<ul class="ls-long">
+  {{- range . }}
+  <li>
+    <span class="perms" aria-hidden="true">{{ if .IsBranch }}drwxr-xr-x{{ else }}-rw-r--r--{{ end }}</span>
+    <time{{ if not .Date.IsZero }} datetime="{{ .Date.Format "2006-01-02" }}"{{ end }}>{{ if .Date.IsZero }}----------{{ else }}{{ .Date.Format "2006-01-02" }}{{ end }}</time>
+    {{- if .IsBranch }}
+    <a class="dir" href="{{ .RelPermalink }}">{{ path.Base .Path }}/</a>
+    {{- else }}
+    <a class="file" href="{{ .RelPermalink }}">{{ path.Base .Path }}.md</a>
+    {{- end }}
+    <span class="desc"># {{ .Title }}</span>
+  </li>
+  {{- end }}
+</ul>

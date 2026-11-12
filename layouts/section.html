@@ -1,0 +1,12 @@
+{{ define "main" }}
+{{- with .Content }}
+{{ partial "prompt-line.html" (dict "page" $ "cmd" "cat README.md") }}
+<div class="output prose">
+  {{ . }}
+</div>
+{{- end }}
+{{ partial "prompt-line.html" (dict "page" . "cmd" "ls -l") }}
+<div class="output">
+  {{ partial "ls-long.html" .Pages }}
+</div>
+{{ end }}

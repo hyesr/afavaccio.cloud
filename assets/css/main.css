@@ -1,0 +1,510 @@
+/* Palette: Catppuccin Mocha. Change these variables to re-theme the site. */
+:root {
+  --crust: #11111b;
+  --mantle: #181825;
+  --base: #1e1e2e;
+  --surface: #313244;
+  --overlay: #9399b2;
+  --subtext: #a6adc8;
+  --text: #cdd6f4;
+  --green: #a6e3a1;
+  --blue: #89b4fa;
+  --mauve: #cba6f7;
+  --red: #f38ba8;
+  --yellow: #f9e2af;
+  --peach: #fab387;
+  --teal: #94e2d5;
+
+  --font: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  background: var(--crust);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--mauve);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* Terminal window */
+
+.terminal {
+  max-width: 56rem;
+  margin: 0 auto;
+  background: var(--base);
+  border: 1px solid var(--surface);
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.45);
+  overflow: hidden;
+}
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--mantle);
+  border-bottom: 1px solid var(--surface);
+  color: var(--overlay);
+  font-size: 0.8rem;
+}
+
+.dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.dots i {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+.dots i:nth-child(2) {
+  background: var(--yellow);
+}
+
+.dots i:nth-child(3) {
+  background: var(--green);
+}
+
+.titlebar-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  padding: 0.5rem 1.25rem;
+  background: var(--mantle);
+  border-bottom: 1px solid var(--surface);
+}
+
+.nav a {
+  color: var(--subtext);
+  text-decoration: none;
+}
+
+.nav a:hover,
+.nav a[aria-current="page"] {
+  color: var(--green);
+}
+
+.screen {
+  padding: 1.25rem;
+  min-height: 60vh;
+}
+
+/* Prompt */
+
+.prompt-line {
+  margin: 1.25rem 0 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+#static > .prompt-line:first-child {
+  margin-top: 0;
+}
+
+.ps1 {
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.ps1 .user {
+  color: var(--green);
+}
+
+.ps1 .path {
+  color: var(--blue);
+}
+
+.cmd {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.prompt-form {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6ch;
+}
+
+.prompt-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  caret-color: var(--green);
+  font: inherit;
+  font-weight: 600;
+  /* 16px minimum stops iOS Safari from zooming on focus. */
+  font-size: 1rem;
+}
+
+.prompt-form input::placeholder {
+  color: var(--overlay);
+  font-weight: 400;
+  opacity: 1;
+}
+
+/* Command output */
+
+.output {
+  margin: 0 0 0.5rem;
+}
+
+#output .line {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+#output .prompt-line {
+  margin: 0.75rem 0 0.25rem;
+}
+
+.error {
+  color: var(--red);
+}
+
+.hint,
+.desc,
+.total,
+.perms {
+  color: var(--overlay);
+}
+
+.hint {
+  margin: 1rem 0 0;
+}
+
+.js-only {
+  display: none;
+}
+
+.js .js-only {
+  display: block;
+}
+
+kbd {
+  padding: 0 0.3em;
+  border: 1px solid var(--surface);
+  border-radius: 4px;
+  color: var(--yellow);
+  font: inherit;
+}
+
+/* Contact row with a brand icon (the `social` shortcode). */
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 1ch;
+}
+
+.social-icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  color: var(--text);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Clickable command (the `cmd` shortcode). */
+.run {
+  padding: 0 0.4em;
+  border: 1px solid var(--surface);
+  border-radius: 4px;
+  background: var(--mantle);
+  color: var(--yellow);
+  font: inherit;
+  cursor: pointer;
+}
+
+.run:hover {
+  border-color: var(--yellow);
+}
+
+.run::before {
+  content: "$ ";
+  color: var(--overlay);
+}
+
+a.dir {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+a.file {
+  color: var(--text);
+}
+
+.ls-short {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 2.5ch;
+  padding: 0;
+  list-style: none;
+}
+
+.total {
+  margin: 0;
+}
+
+.ls-long {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ls-long li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2ch;
+}
+
+.ls-long time {
+  color: var(--subtext);
+}
+
+#output .ls-long .date {
+  color: var(--subtext);
+}
+
+.help-table {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0 3ch;
+}
+
+.help-table .name {
+  color: var(--yellow);
+}
+
+/* Page content */
+
+.prose {
+  max-width: 76ch;
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  margin: 1.75rem 0 0.5rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.prose h1 {
+  color: var(--peach);
+}
+
+.prose h2 {
+  color: var(--yellow);
+}
+
+.prose h3 {
+  color: var(--teal);
+}
+
+.prose h1::before {
+  content: "# ";
+}
+
+.prose h2::before {
+  content: "## ";
+}
+
+.prose h3::before {
+  content: "### ";
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose pre,
+.prose blockquote,
+.prose table {
+  margin: 0 0 1rem;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 3ch;
+}
+
+.prose ul {
+  list-style: "- ";
+}
+
+.prose li::marker {
+  color: var(--overlay);
+}
+
+.prose .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2ch;
+  color: var(--overlay);
+}
+
+.prose blockquote {
+  padding-left: 2ch;
+  border-left: 2px solid var(--surface);
+  color: var(--subtext);
+}
+
+.prose code {
+  color: var(--green);
+  font: inherit;
+}
+
+.prose pre {
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  background: var(--mantle);
+  border: 1px solid var(--surface);
+  border-radius: 6px;
+  line-height: 1.5;
+}
+
+.prose pre code {
+  color: inherit;
+}
+
+.prose .highlight pre {
+  background: var(--mantle);
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+.prose hr {
+  border: 0;
+  border-top: 1px dashed var(--surface);
+  margin: 1.5rem 0;
+}
+
+.prose table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.prose th,
+.prose td {
+  padding: 0.2rem 1.5ch 0.2rem 0;
+  text-align: left;
+  border-bottom: 1px solid var(--surface);
+}
+
+.banner {
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* Small screens: the window fills the viewport. */
+
+@media (max-width: 40rem) {
+  body {
+    padding: 0;
+    font-size: 0.875rem;
+  }
+
+  .terminal {
+    min-height: 100vh;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .nav,
+  .screen {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .nav {
+    column-gap: 0.6rem;
+  }
+
+  .perms {
+    display: none;
+  }
+
+  /* Titles always go on their own line, so rows stay consistent. */
+  .ls-long li {
+    margin-bottom: 0.4rem;
+  }
+
+  .ls-long .desc {
+    flex-basis: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

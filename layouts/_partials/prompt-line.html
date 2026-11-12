@@ -1,0 +1,3 @@
+{{- /* Usage: partial "prompt-line.html" (dict "page" . "cmd" "cat about.md") */ -}}
+{{- $cwd := partial "cwd.html" .page -}}
+<p class="prompt-line"><span class="ps1"><span class="user">{{ site.Params.user }}@{{ site.Params.host }}</span>:<span class="path">~{{ with $cwd }}/{{ . }}{{ end }}</span>$</span> <span class="cmd">{{ .cmd }}</span></p>

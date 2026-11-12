@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+{{- $cwd := partial "cwd.html" . }}
+<body
+  data-cwd="{{ $cwd }}"
+  data-home="{{ site.Home.RelPermalink }}"
+  data-user="{{ site.Params.user }}"
+  data-host="{{ site.Params.host }}"
+  data-bio="{{ site.Params.bio }}"
+  data-launched="{{ site.Params.launched }}"
+  {{- with site.Home.OutputFormats.Get "json" }} data-index="{{ .RelPermalink }}"{{ end }}>
+  <div class="terminal">
+    <header class="titlebar">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="titlebar-title">{{ site.Params.user }}@{{ site.Params.host }}: ~{{ with $cwd }}/{{ . }}{{ end }}</span>
+    </header>
+    {{ partial "nav.html" . }}
+    <main class="screen" id="screen">
+      <div id="static">
+        {{ block "main" . }}{{ end }}
+      </div>
+      <div id="output" aria-live="polite"></div>
+      <form id="prompt" class="prompt-line prompt-form" autocomplete="off" hidden>
+        <label for="cmd" class="ps1"><span class="user">{{ site.Params.user }}@{{ site.Params.host }}</span>:<span class="path">~{{ with $cwd }}/{{ . }}{{ end }}</span>$</label>
+        <input id="cmd" name="cmd" type="text" placeholder="type 'help'" aria-label="Terminal command. Type help for a list of commands."
+          autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+      </form>
+      <noscript><p class="hint"># Enable JavaScript for an interactive prompt. The links above work without it.</p></noscript>
+    </main>
+  </div>
+</body>
+</html>
