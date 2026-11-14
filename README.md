@@ -51,18 +51,3 @@ Two shortcodes are available in any Markdown file:
 - Code highlighting: regenerate with
   `hugo gen chromastyles --style=catppuccin-mocha > assets/css/syntax.css`.
 - Commands: the `commands` object in `assets/js/terminal.js`.
-
-## Deploy (GitHub Pages)
-
-Every push to `main` runs `.github/workflows/hugo.yml`, which builds the site
-with Hugo and publishes it to GitHub Pages. If the build fails nothing is
-deployed and the previous version stays online.
-
-The custom domain comes from `static/CNAME`. Its DNS records point to GitHub
-Pages:
-
-| Type | Name | Value |
-|---|---|---|
-| A | `@` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` |
-| AAAA | `@` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` |
-| CNAME | `www` | `hyesr.github.io` |
