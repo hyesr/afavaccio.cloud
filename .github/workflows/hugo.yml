@@ -37,7 +37,9 @@ jobs:
         env:
           HUGO_ENVIRONMENT: production
           TZ: Europe/Rome
-        run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        # The base URL comes from hugo.toml (https://afavaccio.cloud/), not from Pages,
+        # which reports http until "Enforce HTTPS" is on.
+        run: hugo --gc --minify
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
