@@ -55,31 +55,14 @@ Two shortcodes are available in any Markdown file:
 ## Deploy (GitHub Pages)
 
 Every push to `main` runs `.github/workflows/hugo.yml`, which builds the site
-and publishes it. One-time setup:
+with Hugo and publishes it to GitHub Pages. If the build fails nothing is
+deployed and the previous version stays online.
 
-1. Create a repository on GitHub and push `main`:
+The custom domain comes from `static/CNAME`. Its DNS records point to GitHub
+Pages:
 
-   ```bash
-   git remote add origin git@github.com:hyesr/afavaccio.cloud.git
-   git push -u origin main
-   ```
-
-2. In the repository, *Settings → Pages*: set **Source** to **GitHub Actions**
-   and **Custom domain** to `afavaccio.cloud`. Tick **Enforce HTTPS** once the
-   certificate has been issued.
-
-3. At the domain registrar, add these DNS records:
-
-   | Type | Name | Value |
-   |---|---|---|
-   | A | `@` | `185.199.108.153` |
-   | A | `@` | `185.199.109.153` |
-   | A | `@` | `185.199.110.153` |
-   | A | `@` | `185.199.111.153` |
-   | AAAA | `@` | `2606:50c0:8000::153` |
-   | AAAA | `@` | `2606:50c0:8001::153` |
-   | AAAA | `@` | `2606:50c0:8002::153` |
-   | AAAA | `@` | `2606:50c0:8003::153` |
-   | CNAME | `www` | `hyesr.github.io` |
-
-DNS changes can take up to a day to propagate.
+| Type | Name | Value |
+|---|---|---|
+| A | `@` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` |
+| AAAA | `@` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` |
+| CNAME | `www` | `hyesr.github.io` |
