@@ -1,8 +1,0 @@
-{{ define "main" }}
-{{ partial "prompt-line.html" (dict "page" . "cmd" "ls") }}
-<ul class="output ls-short">
-  {{- range .Data.Terms.Alphabetical }}
-  <li><a class="dir" href="{{ .Page.RelPermalink }}">{{ path.Base .Page.Path }}/</a> <span class="desc">({{ .Count }})</span></li>
-  {{- end }}
-</ul>
-{{ end }}

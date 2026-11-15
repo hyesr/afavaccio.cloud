@@ -1,0 +1,9 @@
+{{- /* Markdown links: links that leave the site open in a new tab. */ -}}
+{{- $u := urls.Parse .Destination -}}
+{{- $external := and $u.IsAbs (ne $u.Host (urls.Parse site.BaseURL).Host) -}}
+<a href="{{ .Destination | safeURL }}"
+  {{- with .Title }} title="{{ . }}"{{ end }}
+  {{- if $external }} target="_blank" rel="noopener"{{ end }}>
+  {{- .Text -}}
+</a>
+{{- /**/ -}}

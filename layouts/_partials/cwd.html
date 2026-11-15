@@ -1,6 +1,6 @@
 {{- /* Returns the shell working directory for a page, relative to ~ ("" for home). */ -}}
 {{- $cwd := "" -}}
-{{- if in (slice "section" "taxonomy" "term") .Kind -}}
+{{- if eq .Kind "section" -}}
   {{- $cwd = strings.TrimPrefix "/" .Path -}}
 {{- else if eq .Kind "page" -}}
   {{- with .Parent -}}

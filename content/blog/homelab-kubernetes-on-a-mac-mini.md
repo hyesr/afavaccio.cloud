@@ -2,7 +2,6 @@
 title: "A Kubernetes homelab on a Mac mini"
 description: "Three K3s nodes on one Mac mini, built from code with Lima and Ansible and run with Flux: what works so far and the choices behind it."
 date: 2026-11-12
-tags: ["homelab", "kubernetes", "gitops"]
 ---
 
 I am building a home server: a three-node Kubernetes cluster on a Mac mini

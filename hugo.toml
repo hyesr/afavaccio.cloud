@@ -2,6 +2,8 @@ baseURL = "https://afavaccio.cloud/"
 locale = "en"
 title = "afavaccio.cloud"
 enableRobotsTXT = true
+# No tags or categories: the blog is small enough to browse by date.
+disableKinds = ["taxonomy", "term"]
 
 [params]
   description = "Personal site of Andrea: about, projects and notes, served from a terminal."
@@ -13,8 +15,6 @@ enableRobotsTXT = true
   user = "guest"
   host = "afavaccio"
 
-[taxonomies]
-  tag = "tags"
 
 [outputs]
   # The home JSON output is the virtual filesystem used by the interactive prompt.

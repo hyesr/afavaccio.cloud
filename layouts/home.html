@@ -19,9 +19,6 @@
   {{- range .Sections }}{{ if not (in $shown .Path) }}
   <li><a class="dir" href="{{ .RelPermalink }}">{{ path.Base .Path }}/</a></li>
   {{- end }}{{ end }}
-  {{- range $name, $tax := site.Taxonomies }}{{ with site.GetPage (printf "/%s" $name) }}
-  <li><a class="dir" href="{{ .RelPermalink }}">{{ path.Base .Path }}/</a></li>
-  {{- end }}{{ end }}
   {{- range .RegularPages }}{{ if not (in $shown .Path) }}
   <li><a class="file" href="{{ .RelPermalink }}">{{ path.Base .Path }}.md</a></li>
   {{- end }}{{ end }}

@@ -29,7 +29,6 @@ A blog post needs this front matter:
 title: "Post title"
 description: "One-line summary."
 date: 2026-11-12
-tags: ["tag"]
 ---
 ```
 

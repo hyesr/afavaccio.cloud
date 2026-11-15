@@ -27,6 +27,7 @@
         <label for="cmd" class="ps1"><span class="user">{{ site.Params.user }}@{{ site.Params.host }}</span>:<span class="path">~{{ with $cwd }}/{{ . }}{{ end }}</span>$</label>
         <input id="cmd" name="cmd" type="text" placeholder="type 'help'" aria-label="Terminal command. Type help for a list of commands."
           autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <span class="fake-cursor" aria-hidden="true"></span>
       </form>
       <noscript><p class="hint"># Enable JavaScript for an interactive prompt. The links above work without it.</p></noscript>
     </main>

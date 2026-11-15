@@ -2,13 +2,11 @@
 {{ partial "prompt-line.html" (dict "page" . "cmd" (printf "cat %s.md" (path.Base .Path))) }}
 <article class="output prose">
   <h1>{{ .Title }}</h1>
-  {{- $tags := .GetTerms "tags" }}
-  {{- if or (not .Date.IsZero) $tags .Params.repo .Params.demo }}
+  {{- if or (not .Date.IsZero) .Params.repo .Params.demo }}
   <p class="meta">
     {{- if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{ end }}
-    {{- with $tags }}<span>tags: {{ range $i, $t := . }}{{ if $i }}, {{ end }}<a href="{{ $t.RelPermalink }}">{{ path.Base $t.Path }}</a>{{ end }}</span>{{ end }}
-    {{- with .Params.repo }}<span><a href="{{ . }}" rel="noopener">source</a></span>{{ end }}
-    {{- with .Params.demo }}<span><a href="{{ . }}" rel="noopener">demo</a></span>{{ end }}
+    {{- with .Params.repo }}<span><a href="{{ . }}" target="_blank" rel="noopener">source</a></span>{{ end }}
+    {{- with .Params.demo }}<span><a href="{{ . }}" target="_blank" rel="noopener">demo</a></span>{{ end }}
   </p>
   {{- end }}
   {{ .Content }}

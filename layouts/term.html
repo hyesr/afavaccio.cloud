@@ -1,6 +1,0 @@
-{{ define "main" }}
-{{ partial "prompt-line.html" (dict "page" . "cmd" "ls -l") }}
-<div class="output">
-  {{ partial "ls-long.html" .Pages }}
-</div>
-{{ end }}

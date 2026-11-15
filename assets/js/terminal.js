@@ -58,21 +58,13 @@
   const lookup = (parts) => {
     if (!parts.length) return { path: '', url: homeUrl, title: 'home', dir: true };
     const path = parts.join('/');
-    const direct = fs.find((i) => i.path === path)
-      || fs.find((i) => !i.dir && i.path === `${path}.md`);
-    if (direct) return direct;
-    // A page reached through a tag, such as tags/homelab/some-post.md.
-    const tag = fs.find((i) => i.pages && i.path === parts.slice(0, -1).join('/'));
-    const name = parts[parts.length - 1];
-    return (tag && fs.find((i) => tag.pages.includes(i.path) && [name, `${name}.md`].includes(baseOf(i.path)))) || null;
+    return fs.find((i) => i.path === path)
+      || fs.find((i) => !i.dir && i.path === `${path}.md`)
+      || null;
   };
 
   const childrenOf = (dirPath) => fs
-    // A tag directory contains the pages that carry the tag.
-    .filter((i) => {
-      const tag = fs.find((t) => t.pages && t.path === dirPath);
-      return tag ? tag.pages.includes(i.path) : parentOf(i.path) === dirPath;
-    })
+    .filter((i) => parentOf(i.path) === dirPath)
     // Menu order first (weight comes from the top menu), then directories, then pages with a
     // `weight` in their front matter ("order"), then newest first, then by name.
     .sort((a, b) => ((a.weight ?? 1000) - (b.weight ?? 1000)) || (b.dir - a.dir)

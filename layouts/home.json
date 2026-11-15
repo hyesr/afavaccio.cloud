@@ -14,15 +14,4 @@
   {{- if not .Date.IsZero -}}{{- $date = .Date.Format "2006-01-02" -}}{{- end -}}
   {{- $items = $items | append (dict "path" (printf "%s.md" (strings.TrimPrefix "/" .Path)) "url" .RelPermalink "title" .Title "date" $date "dir" false "weight" (index $weights .Path | default 1000) "order" .Weight) -}}
 {{- end -}}
-{{- /* Tags: a directory per taxonomy and per term; "pages" lists what a term contains. */ -}}
-{{- range $name, $tax := site.Taxonomies -}}
-  {{- with site.GetPage (printf "/%s" $name) -}}
-    {{- $items = $items | append (dict "path" (strings.TrimPrefix "/" .Path) "url" .RelPermalink "title" .Title "dir" true "weight" 1000) -}}
-  {{- end -}}
-  {{- range $tax.Alphabetical -}}
-    {{- $pages := slice -}}
-    {{- range .Pages -}}{{- $pages = $pages | append (printf "%s.md" (strings.TrimPrefix "/" .Path)) -}}{{- end -}}
-    {{- $items = $items | append (dict "path" (strings.TrimPrefix "/" .Page.Path) "url" .Page.RelPermalink "title" .Page.Title "dir" true "weight" 1000 "pages" $pages) -}}
-  {{- end -}}
-{{- end -}}
 {{- $items | jsonify -}}

@@ -176,6 +176,7 @@ a:hover {
 }
 
 .prompt-form input {
+  order: 2;
   flex: 1;
   min-width: 0;
   padding: 0;
@@ -188,6 +189,39 @@ a:hover {
   font-weight: 600;
   /* 16px minimum stops iOS Safari from zooming on focus. */
   font-size: 1rem;
+}
+
+/* A terminal-style block cursor, shown while the prompt is empty and not focused.
+   On phones the prompt is never focused on load, so there is no native caret. */
+.prompt-form .ps1 {
+  order: 0;
+}
+
+.fake-cursor {
+  order: 1;
+  flex: none;
+  width: 0.6em;
+  height: 1.15em;
+  align-self: center;
+  background: var(--green);
+  animation: blink 1.1s steps(1) infinite;
+}
+
+.prompt-form:focus-within .fake-cursor,
+.prompt-form input:not(:placeholder-shown) ~ .fake-cursor {
+  display: none;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fake-cursor {
+    animation: none;
+  }
 }
 
 .prompt-form input::placeholder {
